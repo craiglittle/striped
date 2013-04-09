@@ -3,6 +3,13 @@
 A clean, stripped-down implementation of Ruby bindings for the Stripe API.
 
 
+## Why?
+
+* A simple codebase that leverages modern gems
+* Complete test coverage
+* Minimize number of HTTP requests to get stuff done
+
+
 ## Installation
 ```ruby
 gem install striped
