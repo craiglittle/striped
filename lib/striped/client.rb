@@ -17,11 +17,15 @@ module Striped
       @api_version = api_version
     end
 
-    def charge
-      Striped::Proxy::Charge.new(self)
+    def charge(charge_id = nil)
+      Striped::Proxy::Charge.new(self, charge_id)
     end
 
-    def post(path, options)
+    def get(path, options = {})
+      request(:get, path, options)
+    end
+
+    def post(path, options = {})
       request(:post, path, options)
     end
 

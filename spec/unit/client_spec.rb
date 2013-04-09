@@ -9,8 +9,13 @@ describe Striped::Client do
 
   describe "#charge" do
     it "returns a charge proxy" do
-      Striped::Proxy::Charge.should_receive(:new).with(client).and_return(proxy)
+      Striped::Proxy::Charge.should_receive(:new).with(client, nil).and_return(proxy)
       expect(client.charge).to eq proxy
+    end
+
+    it "passes on an optional charge ID" do
+      Striped::Proxy::Charge.should_receive(:new).with(client, 'charge_id')
+      client.charge('charge_id')
     end
   end
 
@@ -29,6 +34,17 @@ describe Striped::Client do
 
       it "returns the response" do
         expect(client.post(path, options)).to eq response
+      end
+    end
+
+    describe "#get" do
+      it "sends the proper request" do
+        client.should_receive(:request).with(:get, path, options)
+        client.get(path, options)
+      end
+
+      it "returns the response" do
+        expect(client.get(path, options)).to eq response
       end
     end
   end

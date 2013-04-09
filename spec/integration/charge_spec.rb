@@ -22,4 +22,19 @@ describe Striped do
       expect(create_charge.amount).to eq 400
     end
   end
+
+  context "when fetching a charge" do
+    let(:charge_id) { 'ch_1c9y4KmMtRBLMt' }
+    subject(:fetch_charge) { Striped.charge(charge_id).fetch }
+
+    it "sends a request to the Stripe API" do
+      stub_get_with_auth('/charges')
+      fetch_charge
+      expect(a_get_with_auth("/charges/#{charge_id}")).to have_been_made
+    end
+
+    it "returns a valid object", :vcr do
+      expect(fetch_charge.paid).to eq true
+    end
+  end
 end
