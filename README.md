@@ -1,6 +1,6 @@
 # Striped
 
-A clean implementation of Stripe API Ruby bindings.
+A clean, stripped-down implementation of Ruby bindings for the Stripe API.
 
 
 ## Installation
@@ -25,7 +25,7 @@ Striped.api_version = '2013-02-13'
 Striped.charge.create(
   amount:      400,
   currency:    'usd',
-  card:        'tok_Di6658V24SxcHz",
+  card:        'tok_Di6658V24SxcHz',
   description: 'Charge for test@example.com'
 )
 
