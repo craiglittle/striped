@@ -119,7 +119,7 @@ Striped.customer('cus_1bJAvgSTOS4jUc').discount.delete
 ### Invoices
 
 ```ruby
-Striped.invoice.create(customer: 'cus_1bJAvgSTOS4jUc)
+Striped.invoice.create(customer: 'cus_1bJAvgSTOS4jUc')
 
 Striped.invoice('in_1bJATFdV1Kq2RF').fetch
 
