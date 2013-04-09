@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'faraday', '~> 0.8'
   gem.add_dependency 'faraday_middleware-multi_json', '~> 0.0.5'
+  gem.add_dependency 'hashie', '~> 2.0'
 
   gem.add_development_dependency 'rspec', '~> 2.12'
   gem.add_development_dependency 'webmock', '~> 1.9'
