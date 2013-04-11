@@ -2,6 +2,10 @@
 
 A clean, stripped-down implementation of Ruby bindings for the Stripe API.
 
+[![Build Status](https://travis-ci.org/craiglittle/striped.png?branch=master)][build_status]
+
+[build_status]: https://travis-ci.org/craiglittle/striped
+
 
 ## Why?
 
