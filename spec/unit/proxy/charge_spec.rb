@@ -25,7 +25,7 @@ describe Striped::Proxy::Charge do
   end
 
   describe "#fetch" do
-    it "sends a request to create a charge" do
+    it "sends a request to fetch a charge" do
       client.should_receive(:get).with("/charges/#{charge_id}")
       change_proxy.fetch
     end
