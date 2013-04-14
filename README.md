@@ -95,6 +95,7 @@ Striped.plan.create(
 
 ### Plans
 
+```ruby
 Striped.plan('gold').fetch
 
 Striped.plan('gold').update(name: 'New plan name')
