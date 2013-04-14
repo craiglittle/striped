@@ -79,13 +79,13 @@ describe Striped do
   end
 
   context "when fetching all of the charges" do
-    before { stub_get_with_auth("/charges") }
+    before { stub_get_with_auth('/charges') }
 
     context "with the default arguments" do
       before { Striped.charge.all }
 
       it "sends the proper request to the Stripe API" do
-        expect(a_get_with_auth("/charges")).to have_been_made
+        expect(a_get_with_auth('/charges')).to have_been_made
       end
     end
 
@@ -95,7 +95,7 @@ describe Striped do
       before { Striped.charge.all(all_arguments) }
 
       it "sends the proper request to the Stripe API" do
-        expect(a_get_with_auth("/charges").with(body: all_arguments)).to have_been_made
+        expect(a_get_with_auth('/charges').with(body: all_arguments)).to have_been_made
       end
     end
   end

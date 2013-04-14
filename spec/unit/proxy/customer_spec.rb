@@ -61,4 +61,26 @@ describe Striped::Proxy::Customer do
       expect(@response).to eq api_response
     end
   end
+
+  describe "#all" do
+    context "with the default arguments" do
+      before { @response = customer_proxy.all }
+
+      it "sends a request to capture the customer" do
+        expect(client).to have_received(:get).with('/customers', body: nil)
+      end
+
+      it "returns the API response" do
+        expect(@response).to eq api_response
+      end
+    end
+
+    context "with additional arguments" do
+      before { @response = customer_proxy.all(arguments) }
+
+      it "sends a request to capture the customer" do
+        expect(client).to have_received(:get).with('/customers', body: arguments)
+      end
+    end
+  end
 end

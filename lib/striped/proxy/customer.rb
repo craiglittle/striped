@@ -24,6 +24,10 @@ module Striped
         client.delete("/customers/#{customer_id}")
       end
 
+      def all(arguments = nil)
+        client.get('/customers', body: arguments)
+      end
+
     end
   end
 end
