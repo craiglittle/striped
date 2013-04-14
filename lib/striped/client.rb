@@ -1,4 +1,5 @@
 require 'striped/proxy/charge'
+require 'striped/proxy/customer'
 require 'striped/object'
 
 require 'faraday'
@@ -19,6 +20,10 @@ module Striped
 
     def charge(charge_id = nil)
       Striped::Proxy::Charge.new(self, charge_id)
+    end
+
+    def customer(customer_id = nil)
+      Striped::Proxy::Customer.new(self, customer_id)
     end
 
     def get(path, options = {})

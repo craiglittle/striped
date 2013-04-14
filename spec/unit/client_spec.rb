@@ -20,6 +20,19 @@ describe Striped::Client do
     end
   end
 
+  describe "#customer" do
+    before { Striped::Proxy::Customer.stub(:new).and_return(proxy) }
+
+    it "returns a customer proxy" do
+      expect(client.customer).to eq proxy
+    end
+
+    it "passes on an optional customer ID" do
+      client.customer('customer_id')
+      expect(Striped::Proxy::Customer).to have_received(:new).with(client, 'customer_id')
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }

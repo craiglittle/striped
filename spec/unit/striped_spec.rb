@@ -8,14 +8,16 @@ describe Striped do
     before { Striped::Client.stub(:new).and_return(client) }
     after  { Striped.instance_variable_set(:@client, nil) }
 
-    describe "::charge" do
-      before do
-        client.stub(:charge)
-        Striped.charge
-      end
+    [:charge, :customer].each do |resource|
+      describe "::#{resource}" do
+        before do
+          client.stub(resource)
+          Striped.send(resource)
+        end
 
-      it "delegates to the client" do
-        expect(client).to have_received(:charge)
+        it "delegates to the client" do
+          expect(client).to have_received(resource)
+        end
       end
     end
   end
