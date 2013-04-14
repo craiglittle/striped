@@ -68,12 +68,7 @@ describe Striped do
     end
 
     context "with additional arguments" do
-      let(:capture_arguments) {
-        {
-          amount:          '1000',
-          application_fee: '500'
-        }
-      }
+      let(:capture_arguments) { {amount: '1000', application_fee: '500'} }
 
       before { Striped.charge(charge_id).capture(capture_arguments) }
 

@@ -4,9 +4,11 @@ A clean, stripped-down implementation of Ruby bindings for the Stripe API.
 
 [![Build Status](https://travis-ci.org/craiglittle/striped.png?branch=master)][build_status]
 [![Dependency Status](https://gemnasium.com/craiglittle/striped.png)][dependencies]
+[![Coverage Status](https://coveralls.io/repos/craiglittle/striped/badge.png?branch=master)][coverage_status]
 
 [build_status]: https://travis-ci.org/craiglittle/striped
 [dependencies]: https://gemnasium.com/craiglittle/striped
+[coverage_status]: https://coveralls.io/r/craiglittle/striped
 
 
 ## Why?
