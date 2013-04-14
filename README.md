@@ -91,6 +91,9 @@ Striped.plan.create(
   currency: 'usd',
   id:       'gold'
 )
+```
+
+### Plans
 
 Striped.plan('gold').fetch
 
