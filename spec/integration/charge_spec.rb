@@ -77,4 +77,26 @@ describe Striped do
       end
     end
   end
+
+  context "when fetching all of the charges" do
+    before { stub_get_with_auth("/charges") }
+
+    context "with the default arguments" do
+      before { Striped.charge.all }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_get_with_auth("/charges")).to have_been_made
+      end
+    end
+
+    context "with additional arguments" do
+      let(:all_arguments) { {count: '20', customer: 'customer_id'} }
+
+      before { Striped.charge.all(all_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_get_with_auth("/charges").with(body: all_arguments)).to have_been_made
+      end
+    end
+  end
 end

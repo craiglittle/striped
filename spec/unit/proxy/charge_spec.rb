@@ -80,4 +80,26 @@ describe Striped::Proxy::Charge do
       end
     end
   end
+
+  describe "#all" do
+    context "with the default arguments" do
+      before { @response = charge_proxy.all }
+
+      it "sends a request to capture the charge" do
+        expect(client).to have_received(:get).with('/charges', body: nil)
+      end
+
+      it "returns the API response" do
+        expect(@response).to eq api_response
+      end
+    end
+
+    context "with additional arguments" do
+      before { @response = charge_proxy.all(arguments) }
+
+      it "sends a request to capture the charge" do
+        expect(client).to have_received(:get).with('/charges', body: arguments)
+      end
+    end
+  end
 end
