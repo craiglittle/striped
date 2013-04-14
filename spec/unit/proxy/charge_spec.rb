@@ -14,24 +14,26 @@ describe Striped::Proxy::Charge do
   end
 
   describe "#create" do
+    before { @response = change_proxy.create(arguments) }
+
     it "sends a request to create a charge" do
-      client.should_receive(:post).with('/charges', body: arguments)
-      change_proxy.create(arguments)
+      expect(client).to have_received(:post).with('/charges', body: arguments)
     end
 
     it "returns the API response" do
-      expect(change_proxy.create(arguments)).to eq api_response
+      expect(@response).to eq api_response
     end
   end
 
   describe "#fetch" do
+    before { @response = change_proxy.fetch }
+
     it "sends a request to fetch a charge" do
-      client.should_receive(:get).with("/charges/#{charge_id}")
-      change_proxy.fetch
+      expect(client).to have_received(:get).with("/charges/#{charge_id}")
     end
 
     it "returns the API response" do
-      expect(change_proxy.fetch).to eq api_response
+      expect(@response).to eq api_response
     end
   end
 end

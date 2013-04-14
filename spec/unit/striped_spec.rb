@@ -9,9 +9,13 @@ describe Striped do
     after  { Striped.instance_variable_set(:@client, nil) }
 
     describe "::charge" do
-      it "delegates to the client" do
-        client.should_receive(:charge)
+      before do
+        client.stub(:charge)
         Striped.charge
+      end
+
+      it "delegates to the client" do
+        expect(client).to have_received(:charge)
       end
     end
   end
