@@ -6,7 +6,7 @@ describe Striped::Proxy::Charge do
   let(:charge_id)        { 'charge_id' }
   let(:api_response)     { double('API response') }
   let(:arguments)        { double('arguments') }
-  subject(:change_proxy) { Striped::Proxy::Charge.new(client, charge_id) }
+  subject(:charge_proxy) { Striped::Proxy::Charge.new(client, charge_id) }
 
   before do
     client.stub(:get).and_return(api_response)
@@ -14,7 +14,7 @@ describe Striped::Proxy::Charge do
   end
 
   describe "#create" do
-    before { @response = change_proxy.create(arguments) }
+    before { @response = charge_proxy.create(arguments) }
 
     it "sends a request to create a charge" do
       expect(client).to have_received(:post).with('/charges', body: arguments)
@@ -26,7 +26,7 @@ describe Striped::Proxy::Charge do
   end
 
   describe "#fetch" do
-    before { @response = change_proxy.fetch }
+    before { @response = charge_proxy.fetch }
 
     it "sends a request to fetch a charge" do
       expect(client).to have_received(:get).with("/charges/#{charge_id}")
@@ -34,6 +34,28 @@ describe Striped::Proxy::Charge do
 
     it "returns the API response" do
       expect(@response).to eq api_response
+    end
+  end
+
+  describe "#refund" do
+    context "when refunding the entire amount" do
+      before { @response = charge_proxy.refund }
+
+      it "sends a request to refund the charge" do
+        expect(client).to have_received(:post).with("/charges/#{charge_id}/refund", body: nil)
+      end
+
+      it "returns the API response" do
+        expect(@response).to eq api_response
+      end
+    end
+
+    context "when refunding a partial amount" do
+      before { @response = charge_proxy.refund(arguments) }
+
+      it "sends a request to refund a part of the charge" do
+        expect(client).to have_received(:post).with("/charges/#{charge_id}/refund", body: arguments)
+      end
     end
   end
 end

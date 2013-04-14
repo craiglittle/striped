@@ -1,6 +1,8 @@
 require 'integration/helper'
 
 describe Striped do
+  let(:charge_id) { 'charge_id' }
+
   context "when creating a charge" do
     let(:create_arguments) {
       {
@@ -22,8 +24,6 @@ describe Striped do
   end
 
   context "when fetching a charge" do
-    let(:charge_id) { 'charge_id' }
-
     before do
       stub_get_with_auth("/charges/#{charge_id}")
       Striped.charge(charge_id).fetch
@@ -31,6 +31,28 @@ describe Striped do
 
     it "sends the proper request to the Stripe API" do
       expect(a_get_with_auth("/charges/#{charge_id}")).to have_been_made
+    end
+  end
+
+  context "when refunding a charge" do
+    before { stub_post_with_auth("/charges/#{charge_id}/refund") }
+
+    context "for the entire amount" do
+      before { Striped.charge(charge_id).refund }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_post_with_auth("/charges/#{charge_id}/refund")).to have_been_made
+      end
+    end
+
+    context "for a partial amount" do
+      let(:refund_arguments) { {amount: '1000'} }
+
+      before { Striped.charge(charge_id).refund(refund_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_post_with_auth("/charges/#{charge_id}/refund").with(body: refund_arguments)).to have_been_made
+      end
     end
   end
 end

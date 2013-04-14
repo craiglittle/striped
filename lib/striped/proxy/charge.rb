@@ -16,6 +16,10 @@ module Striped
         client.get("/charges/#{charge_id}")
       end
 
+      def refund(arguments = nil)
+        client.post("/charges/#{charge_id}/refund", body: arguments)
+      end
+
     end
   end
 end
