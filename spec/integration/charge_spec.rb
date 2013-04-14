@@ -55,4 +55,31 @@ describe Striped do
       end
     end
   end
+
+  context "when capturing a charge" do
+    before { stub_post_with_auth("/charges/#{charge_id}/capture") }
+
+    context "with the default arguments" do
+      before { Striped.charge(charge_id).capture }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_post_with_auth("/charges/#{charge_id}/capture")).to have_been_made
+      end
+    end
+
+    context "with additional arguments" do
+      let(:capture_arguments) {
+        {
+          amount:          '1000',
+          application_fee: '500'
+        }
+      }
+
+      before { Striped.charge(charge_id).capture(capture_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_post_with_auth("/charges/#{charge_id}/capture").with(body: capture_arguments)).to have_been_made
+      end
+    end
+  end
 end

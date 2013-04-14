@@ -58,4 +58,26 @@ describe Striped::Proxy::Charge do
       end
     end
   end
+
+  describe "#capture" do
+    context "with the default arguments" do
+      before { @response = charge_proxy.capture }
+
+      it "sends a request to capture the charge" do
+        expect(client).to have_received(:post).with("/charges/#{charge_id}/capture", body: nil)
+      end
+
+      it "returns the API response" do
+        expect(@response).to eq api_response
+      end
+    end
+
+    context "with additional arguments" do
+      before { @response = charge_proxy.capture(arguments) }
+
+      it "sends a request to capture the charge" do
+        expect(client).to have_received(:post).with("/charges/#{charge_id}/capture", body: arguments)
+      end
+    end
+  end
 end
