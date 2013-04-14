@@ -3,6 +3,11 @@ require 'striped'
 require 'webmock/rspec'
 require 'json'
 
+if ENV['CI']
+  require 'coveralls'
+  Coveralls.wear!
+end
+
 Striped.api_key     = 'api_key'
 Striped.api_version = 'api_version'
 
