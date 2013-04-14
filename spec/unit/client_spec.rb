@@ -40,27 +40,17 @@ describe Striped::Client do
 
     before { client.stub(:request).and_return(response) }
 
-    describe "#post" do
-      before { @response = client.post(path, options) }
+    [:get, :post, :delete].each do |method|
+      describe "#post" do
+        before { @response = client.send(method, path, options) }
 
-      it "sends the proper request" do
-        expect(client).to have_received(:request).with(:post, path, options)
-      end
+        it "sends the proper request" do
+          expect(client).to have_received(:request).with(method, path, options)
+        end
 
-      it "returns the response" do
-        expect(@response).to eq response
-      end
-    end
-
-    describe "#get" do
-      before { @response = client.get(path, options) }
-
-      it "sends the proper request" do
-        expect(client).to have_received(:request).with(:get, path, options)
-      end
-
-      it "returns the response" do
-        expect(@response).to eq response
+        it "returns the response" do
+          expect(@response).to eq response
+        end
       end
     end
   end

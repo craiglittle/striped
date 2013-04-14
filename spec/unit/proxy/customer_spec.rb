@@ -9,8 +9,9 @@ describe Striped::Proxy::Customer do
   subject(:customer_proxy) { Striped::Proxy::Customer.new(client, customer_id) }
 
   before do
-    client.stub(:get).and_return(api_response)
-    client.stub(:post).and_return(api_response)
+    [:get, :post, :delete].each do |method|
+      client.stub(method).and_return(api_response)
+    end
   end
 
   describe "#create" do
@@ -42,6 +43,18 @@ describe Striped::Proxy::Customer do
 
     it "sends a request to update a customer" do
       expect(client).to have_received(:post).with("/customers/#{customer_id}", body: arguments)
+    end
+
+    it "returns the API response" do
+      expect(@response).to eq api_response
+    end
+  end
+
+  describe "#delete" do
+    before { @response = customer_proxy.delete }
+
+    it "sends a request to fetch a customer" do
+      expect(client).to have_received(:delete).with("/customers/#{customer_id}")
     end
 
     it "returns the API response" do

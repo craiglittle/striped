@@ -34,6 +34,10 @@ module Striped
       request(:post, path, options)
     end
 
+    def delete(path, options = {})
+      request(:delete, path, options)
+    end
+
     private
 
     def request(method, path, options)
