@@ -16,6 +16,10 @@ module Striped
         client.get("/customers/#{customer_id}")
       end
 
+      def update(arguments)
+        client.post("/customers/#{customer_id}", body: arguments)
+      end
+
     end
   end
 end
