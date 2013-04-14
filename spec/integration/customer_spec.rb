@@ -1,6 +1,8 @@
 require 'integration/helper'
 
 describe Striped do
+  let(:customer_id) { 'customer_id' }
+
   context "when creating a customer" do
     let(:create_arguments) {
       {
@@ -17,6 +19,17 @@ describe Striped do
 
     it "sends the proper request to the Stripe API" do
       expect(a_post_with_auth('/customers').with(body: create_arguments)).to have_been_made
+    end
+  end
+
+  context "when fetching a customer" do
+    before do
+      stub_get_with_auth("/customers/#{customer_id}")
+      Striped.customer(customer_id).fetch
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(a_get_with_auth("/customers/#{customer_id}")).to have_been_made
     end
   end
 end

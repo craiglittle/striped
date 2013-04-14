@@ -12,6 +12,10 @@ module Striped
         client.post('/customers', body: arguments)
       end
 
+      def fetch
+        client.get("/customers/#{customer_id}")
+      end
+
     end
   end
 end

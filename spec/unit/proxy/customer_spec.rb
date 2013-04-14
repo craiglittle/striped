@@ -24,4 +24,16 @@ describe Striped::Proxy::Customer do
       expect(@response).to eq api_response
     end
   end
+
+  describe "#fetch" do
+    before { @response = customer_proxy.fetch }
+
+    it "sends a request to fetch a customer" do
+      expect(client).to have_received(:get).with("/customers/#{customer_id}")
+    end
+
+    it "returns the API response" do
+      expect(@response).to eq api_response
+    end
+  end
 end
