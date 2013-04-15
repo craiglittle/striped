@@ -1,3 +1,5 @@
+require 'striped/proxy/subscription'
+
 module Striped
   module Proxy
     class Customer
@@ -6,6 +8,10 @@ module Striped
       def initialize(client, customer_id)
         @client      = client
         @customer_id = customer_id
+      end
+
+      def subscription
+        Striped::Proxy::Subscription.new(client, customer_id)
       end
 
       def create(arguments)

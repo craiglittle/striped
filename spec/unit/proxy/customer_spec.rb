@@ -14,6 +14,23 @@ describe Striped::Proxy::Customer do
     end
   end
 
+  describe "#subscription" do
+    let(:proxy) { double('proxy') }
+
+    before do
+      Striped::Proxy::Subscription.stub(:new).and_return(proxy)
+      @proxy = customer_proxy.subscription
+    end
+
+    it "returns a subscription proxy" do
+      expect(@proxy).to eq proxy
+    end
+
+    it "is passed the client and customer_id when instantiated" do
+      expect(Striped::Proxy::Subscription).to have_received(:new).with(client, 'customer_id')
+    end
+  end
+
   describe "#create" do
     before { @response = customer_proxy.create(arguments) }
 
