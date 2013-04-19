@@ -37,6 +37,7 @@ Striped.api_version = '2013-02-13'
 ### Charges
 
 ```ruby
+# Create a charge
 Striped.charge.create(
   amount:      400,
   currency:    'usd',
@@ -44,46 +45,67 @@ Striped.charge.create(
   description: 'Charge for test@example.com'
 )
 
-Striped.charge('ch_1bJAHzdT333Rq1').fetch
+charge = Striped.charge('ch_1bJAHzdT333Rq1')
 
-Striped.charge('ch_1bJAHzdT333Rq1').refund
+# Fetch a charge
+charge.fetch
 
-Striped.charge('ch_1bJAHzdT333Rq1').capture
+# Refund a charge
+charge.refund
 
+# Capture a charge
+charge.capture
+
+# Fetch a collection of charges
 Striped.charge.all(count: 3)
-
 ```
 
 ### Customers
 
 ```ruby
+# Create a customer
 Striped.customer.create(
   description: 'Customer for test@example.com',
   card:        'tok_Di6658V24SxcHz'
 )
 
-Striped.customer('cus_1bJAvgSTOS4jUc').fetch
+customer = Striped.customer('cus_1bJAvgSTOS4jUc')
 
-Striped.customer('cus_1bJAvgSTOS4jUc').update(
+# Fetch a customer
+customer.fetch
+
+# Update a customer
+customer.update(
   description: 'Customer for test@example.com',
   card:        'tok_Di6658V24SxcHz'
 )
 
-Striped.customer('cus_1bJAvgSTOS4jUc').delete
+# Delete a customer
+customer.delete
 
+# Fetch a list of customers
 Striped.customer.all
 ```
 
 ### Subscriptions
 
 ```ruby
-Striped.customer('cus_1bJAvgSTOS4jUc').subscription.update(
+subscription = Striped.customer('cus_1bJAvgSTOS4jUc').subscription
+
+# Update a customer's subscription
+subscription.update(
   plan:    'basic',
   prorate: true
 )
 
-Striped.customer('cus_1bJAvgSTOS4jUc').subscription.cancel
+# Cancel a customer's subscription
+subscription.cancel
+```
 
+### Plans
+
+```ruby
+# Create a subscription plan
 Striped.plan.create(
   amount:   2000,
   interval: 'month',
@@ -91,23 +113,26 @@ Striped.plan.create(
   currency: 'usd',
   id:       'gold'
 )
-```
 
-### Plans
+plan = Striped.plan('gold')
 
-```ruby
-Striped.plan('gold').fetch
+# Fetch a subscription plan
+plan.fetch
 
-Striped.plan('gold').update(name: 'New plan name')
+# Update a subscription plan
+plan.update(name: 'New plan name')
 
-Striped.plan('gold').delete
+# Delete a subscription plan
+plan.delete
 
+# Fetch a list of subscription plans
 Striped.plan.all
 ```
 
 ### Coupons
 
 ```ruby
+# Create a coupon
 Striped.coupon.create(
  percent_off:        25,
  duration:           'repeating',
@@ -115,40 +140,56 @@ Striped.coupon.create(
  id:                 '25OFF'
 )
 
-Striped.coupon('25OFF').fetch
+coupon = Striped.coupon('25OFF')
 
-Striped.coupon('25OFF').delete
+# Fetch a coupon
+coupon.fetch
 
+# Delete a coupon
+coupon.delete
+
+# Fetch a list of coupons
 Striped.coupon.all
 ```
 
 ### Discounts
 
 ```ruby
+# Delete a discount
 Striped.customer('cus_1bJAvgSTOS4jUc').discount.delete
 ```
 
 ### Invoices
 
 ```ruby
+# Create an invoice
 Striped.invoice.create(customer: 'cus_1bJAvgSTOS4jUc')
 
-Striped.invoice('in_1bJATFdV1Kq2RF').fetch
+invoice = Striped.invoice('in_1bJATFdV1Kq2RF')
 
-Striped.invoice('in_1bJATFdV1Kq2RF').lines(count: 5, offset: 5)
+# Fetch an invoice
+invoice.fetch
 
-Striped.invoice('in_1bJATFdV1Kq2RF').pay
+# Fetch an invoice's line items
+invoice.lines(count: 5, offset: 5)
 
-Striped.invoice('in_1bJATFdV1Kq2RF').update(closed: true)
+# Pay an invoice
+invoice.pay
 
+# Update an invoice
+invoice.update(closed: true)
+
+# Fetch an upcoming invoice
 Striped.invoice.upcoming(customer: 'cus_1bJAvgSTOS4jUc')
 
+# Fetch a list of invoices
 Striped.invoice.all(customer: 'cus_1bJAvgSTOS4jUc', count: 3)
 ```
 
 ### Invoice Items
 
 ```ruby
+# Create an invoice item
 Striped.invoice_item.create(
   customer:    'cus_1bJAvgSTOS4jUc',
   amount:      1000,
@@ -156,21 +197,28 @@ Striped.invoice_item.create(
   description: 'One-time setup fee'
 )
 
-Striped.invoice_item('ii_1bJAM9yq8uyTqX').fetch
+invoice_item = Striped.invoice_item('ii_1bJAM9yq8uyTqX')
 
-Striped.invoice_item('ii_1bJAM9yq8uyTqX').update(
+# Fetch an invoice item
+invoice_item.fetch
+
+# Update an invoice item
+invoice_item.update(
   amount:      1500,
   description: 'Customer for test@example.com'
 )
 
-Striped.invoice_item('ii_1bJAM9yq8uyTqX').delete
+# Delete an invoice item
+invoice_item.delete
 
+# Fetch a list of invoice items
 Striped.invoice_item.all
 ```
 
 ### Disputes
 
 ```ruby
+# Update a dispute
 Striped.dispute(charge: 'ch_1bJAHzdT333Rq1').update(
   evidence: "Here's evidence showing this charge is legitimate."
 )
@@ -179,20 +227,24 @@ Striped.dispute(charge: 'ch_1bJAHzdT333Rq1').update(
 ### Account
 
 ```ruby
+# Fetch your account details
 Striped.account.fetch
 ```
 
 ### Events
 
 ```ruby
+# Fetch an event
 Striped.event('evt_1bJAfQlZPK0kTM').fetch
 
+# Fetch a list of events
 Striped.event.all
 ```
 
 ### Tokens
 
 ```ruby
+# Create a card token
 Striped.token.create(
   card: {
     number:    '4242424242424242',
@@ -202,6 +254,7 @@ Striped.token.create(
   }
 )
 
+# Fetch a card token
 Striped.token('tok_Di6658V24SxcHz').fetch
 ```
 
