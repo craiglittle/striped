@@ -33,6 +33,14 @@ describe Striped::Client do
     end
   end
 
+  describe "#customer" do
+    before { Striped::Proxy::Plan.stub(:new).and_return(proxy) }
+
+    it "returns a customer proxy" do
+      expect(client.plan).to eq proxy
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }

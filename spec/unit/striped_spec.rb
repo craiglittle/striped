@@ -8,7 +8,7 @@ describe Striped do
     before { Striped::Client.stub(:new).and_return(client) }
     after  { Striped.instance_variable_set(:@client, nil) }
 
-    [:charge, :customer].each do |resource|
+    [:charge, :customer, :plan].each do |resource|
       describe "::#{resource}" do
         before do
           client.stub(resource)
