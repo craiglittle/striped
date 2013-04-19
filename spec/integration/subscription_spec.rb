@@ -16,7 +16,7 @@ describe Striped do
     end
   end
 
-  context "when cancelling a customer's subscription" do
+  context "when canceling a customer's subscription" do
     before do
       stub_delete_with_auth("/customers/#{customer_id}/subscription")
       Striped.customer(customer_id).subscription.cancel
