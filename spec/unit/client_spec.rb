@@ -33,11 +33,16 @@ describe Striped::Client do
     end
   end
 
-  describe "#customer" do
+  describe "#plan" do
     before { Striped::Proxy::Plan.stub(:new).and_return(proxy) }
 
-    it "returns a customer proxy" do
+    it "returns a plan proxy" do
       expect(client.plan).to eq proxy
+    end
+
+    it "passes on an optional plan ID" do
+      client.plan('plan_id')
+      expect(Striped::Proxy::Plan).to have_received(:new).with(client, 'plan_id')
     end
   end
 

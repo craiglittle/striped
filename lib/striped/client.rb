@@ -27,8 +27,8 @@ module Striped
       Striped::Proxy::Customer.new(self, customer_id)
     end
 
-    def plan
-      Striped::Proxy::Plan.new(self)
+    def plan(plan_id = nil)
+      Striped::Proxy::Plan.new(self, plan_id)
     end
 
     def get(path, options = {})
