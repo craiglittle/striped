@@ -12,6 +12,10 @@ module Striped
         client.post("/customers/#{customer_id}/subscription", body: arguments)
       end
 
+      def cancel
+        client.delete("/customers/#{customer_id}/subscription")
+      end
+
     end
   end
 end
