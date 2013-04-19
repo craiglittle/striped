@@ -220,7 +220,7 @@ Striped.invoice_item.all
 ```ruby
 # Update a dispute
 Striped.dispute(charge: 'ch_1bJAHzdT333Rq1').update(
-  evidence: "Here's evidence showing this charge is legitimate."
+  evidence: 'Here's evidence showing this charge is legitimate.'
 )
 ```
 
