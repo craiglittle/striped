@@ -20,6 +20,10 @@ module Striped
         client.post("/plans/#{plan_id}", body: arguments)
       end
 
+      def delete
+        client.delete("/plans/#{plan_id}")
+      end
+
     end
   end
 end

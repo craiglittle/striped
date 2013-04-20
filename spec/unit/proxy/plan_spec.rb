@@ -9,7 +9,7 @@ describe Striped::Proxy::Plan do
   subject(:plan_proxy)     { Striped::Proxy::Plan.new(client, plan_id) }
 
   before do
-    [:get, :post].each do |method|
+    [:get, :post, :delete].each do |method|
       client.stub(method).and_return(api_response)
     end
   end
@@ -43,6 +43,18 @@ describe Striped::Proxy::Plan do
 
     it "sends a request to update a plan" do
       expect(client).to have_received(:post).with("/plans/#{plan_id}", body: arguments)
+    end
+
+    it "returns the API response" do
+      expect(@response).to eq api_response
+    end
+  end
+
+  describe "#delete" do
+    before { @response = plan_proxy.delete }
+
+    it "sends a request to delete a plan" do
+      expect(client).to have_received(:delete).with("/plans/#{plan_id}")
     end
 
     it "returns the API response" do
