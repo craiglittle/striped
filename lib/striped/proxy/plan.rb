@@ -16,6 +16,10 @@ module Striped
         client.get("/plans/#{plan_id}")
       end
 
+      def update(arguments)
+        client.post("/plans/#{plan_id}", body: arguments)
+      end
+
     end
   end
 end

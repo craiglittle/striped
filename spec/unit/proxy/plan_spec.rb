@@ -37,4 +37,16 @@ describe Striped::Proxy::Plan do
       expect(@response).to eq api_response
     end
   end
+
+  describe "#update" do
+    before { @response = plan_proxy.update(arguments) }
+
+    it "sends a request to update a plan" do
+      expect(client).to have_received(:post).with("/plans/#{plan_id}", body: arguments)
+    end
+
+    it "returns the API response" do
+      expect(@response).to eq api_response
+    end
+  end
 end

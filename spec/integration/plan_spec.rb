@@ -20,7 +20,8 @@ describe Striped do
     end
 
     it "sends the proper request to the Stripe API" do
-      expect(a_post_with_auth('/plans').with(body: create_arguments)).to have_been_made
+      expect(a_post_with_auth('/plans').with(body: create_arguments))
+        .to have_been_made
     end
   end
 
@@ -32,6 +33,20 @@ describe Striped do
 
     it "sends the proper request to the Stripe API" do
       expect(a_get_with_auth("/plans/#{plan_id}")).to have_been_made
+    end
+  end
+
+  context "when updating a plan" do
+    let(:update_arguments) { {name: 'New name'} }
+
+    before do
+      stub_post_with_auth("/plans/#{plan_id}")
+      Striped.plan(plan_id).update(update_arguments)
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(a_post_with_auth("/plans/#{plan_id}").with(body: update_arguments))
+        .to have_been_made
     end
   end
 end
