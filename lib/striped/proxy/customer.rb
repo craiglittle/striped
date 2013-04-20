@@ -1,37 +1,14 @@
+require 'striped/proxy/base'
+require 'striped/proxy/operations'
 require 'striped/proxy/subscription'
 
 module Striped
   module Proxy
-    class Customer
-      attr_reader :client, :customer_id
-
-      def initialize(client, customer_id)
-        @client      = client
-        @customer_id = customer_id
-      end
+    class Customer < Base
+      include Striped::Proxy::Operations :create, :fetch, :update, :delete, :all
 
       def subscription
-        Striped::Proxy::Subscription.new(client, customer_id)
-      end
-
-      def create(arguments)
-        client.post('/customers', body: arguments)
-      end
-
-      def fetch
-        client.get("/customers/#{customer_id}")
-      end
-
-      def update(arguments)
-        client.post("/customers/#{customer_id}", body: arguments)
-      end
-
-      def delete
-        client.delete("/customers/#{customer_id}")
-      end
-
-      def all(arguments = nil)
-        client.get('/customers', body: arguments)
+        Striped::Proxy::Subscription.new(client, resource_id)
       end
 
     end
