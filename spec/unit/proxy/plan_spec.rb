@@ -7,5 +7,5 @@ describe Striped::Proxy::Plan do
   let(:resource_id) { 'plan_id' }
   subject(:proxy)   { Striped::Proxy::Plan.new(client, resource_id) }
 
-  it_executes_a_valid_operation :create, :fetch, :update, :delete
+  it_executes_a_valid_operation :create, :fetch, :update, :delete, :all
 end

@@ -60,4 +60,26 @@ describe Striped do
       expect(a_delete_with_auth("/plans/#{plan_id}")).to have_been_made
     end
   end
+
+  context "when fetching all of the plans" do
+    before { stub_get_with_auth('/plans') }
+
+    context "with the default arguments" do
+      before { Striped.plan.all }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_get_with_auth('/plans')).to have_been_made
+      end
+    end
+
+    context "with additional arguments" do
+      let(:all_arguments) { {count: '20', offset: '40'} }
+
+      before { Striped.plan.all(all_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_get_with_auth('/plans').with(body: all_arguments)).to have_been_made
+      end
+    end
+  end
 end
