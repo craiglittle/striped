@@ -4,7 +4,7 @@ require 'striped/proxy/operations'
 module Striped
   module Proxy
     class Coupon < Base
-      include Striped::Proxy::Operations :create, :fetch, :delete
+      include Striped::Proxy::Operations :create, :fetch, :delete, :all
     end
   end
 end
