@@ -7,5 +7,5 @@ describe Striped::Proxy::Coupon do
   let(:resource_id) { 'coupon_id' }
   subject(:proxy)   { Striped::Proxy::Coupon.new(client, resource_id) }
 
-  it_executes_a_valid_operation :create, :fetch
+  it_executes_a_valid_operation :create, :fetch, :delete
 end

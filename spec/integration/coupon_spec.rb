@@ -34,4 +34,15 @@ describe Striped do
       expect(a_get_with_auth("/coupons/#{coupon_id}")).to have_been_made
     end
   end
+
+  context "when deleting a coupon" do
+    before do
+      stub_delete_with_auth("/coupons/#{coupon_id}")
+      Striped.coupon(coupon_id).delete
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(a_delete_with_auth("/coupons/#{coupon_id}")).to have_been_made
+    end
+  end
 end
