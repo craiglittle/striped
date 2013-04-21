@@ -8,7 +8,6 @@ module ProxyOperationMacros
     SUPPORTED_OPERATIONS   = [:create, :fetch, :update, :delete, :all]
 
     def it_executes_a_valid_operation(*operations)
-      let(:resource_id)  { 'resource_id' }
       let(:arguments)    { double('arguments') }
       let(:api_response) { double('api_response') }
 
