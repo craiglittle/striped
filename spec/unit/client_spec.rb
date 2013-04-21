@@ -46,6 +46,19 @@ describe Striped::Client do
     end
   end
 
+  describe "#coupon" do
+    before { Striped::Proxy::Coupon.stub(:new).and_return(proxy) }
+
+    it "returns a coupon proxy" do
+      expect(client.coupon).to eq proxy
+    end
+
+    it "passes on an optional coupon ID" do
+      client.coupon('coupon_id')
+      expect(Striped::Proxy::Coupon).to have_received(:new).with(client, 'coupon_id')
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }
