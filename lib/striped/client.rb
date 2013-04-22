@@ -2,6 +2,7 @@ require 'striped/proxy/charge'
 require 'striped/proxy/customer'
 require 'striped/proxy/plan'
 require 'striped/proxy/coupon'
+require 'striped/proxy/invoice'
 require 'striped/object'
 
 require 'faraday'
@@ -34,6 +35,10 @@ module Striped
 
     def coupon(coupon_id = nil)
       Striped::Proxy::Coupon.new(self, coupon_id)
+    end
+
+    def invoice(invoice_id = nil)
+      Striped::Proxy::Invoice.new(self, invoice_id)
     end
 
     def get(path, options = {})

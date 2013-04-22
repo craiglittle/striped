@@ -9,7 +9,7 @@ module Striped
 
     attr_accessor :api_key, :api_version
 
-    delegate [:charge, :customer, :plan, :coupon] => :client
+    delegate [:charge, :customer, :plan, :coupon, :invoice] => :client
   end
 
   def self.client
