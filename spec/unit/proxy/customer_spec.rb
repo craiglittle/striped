@@ -27,4 +27,23 @@ describe Striped::Proxy::Customer do
       )
     end
   end
+
+  describe "#discount" do
+    let(:discount_proxy) { double('proxy') }
+
+    before do
+      Striped::Proxy::Discount.stub(:new).and_return(discount_proxy)
+      @proxy = proxy.discount
+    end
+
+    it "returns a discount proxy" do
+      expect(@proxy).to eq discount_proxy
+    end
+
+    it "is passed the client and customer_id when instantiated" do
+      expect(Striped::Proxy::Discount).to(
+        have_received(:new).with(client, resource_id)
+      )
+    end
+  end
 end
