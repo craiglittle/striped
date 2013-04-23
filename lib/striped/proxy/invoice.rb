@@ -10,6 +10,10 @@ module Striped
         client.post("/invoices/#{resource_id}/pay")
       end
 
+      def upcoming(arguments)
+        client.get('/invoices/upcoming', body: arguments)
+      end
+
     end
   end
 end

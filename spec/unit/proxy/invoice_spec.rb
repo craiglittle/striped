@@ -20,4 +20,16 @@ describe Striped::Proxy::Invoice do
 
     it_returns_the_api_response
   end
+
+  describe "#upcoming" do
+    before { @response = proxy.upcoming(arguments) }
+
+    it "sends a request to pay an invoice" do
+      expect(client).to(
+        have_received(:get).with('/invoices/upcoming', body: arguments)
+      )
+    end
+
+    it_returns_the_api_response
+  end
 end

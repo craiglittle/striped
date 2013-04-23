@@ -74,4 +74,19 @@ describe Striped do
       expect(a_post_with_auth("/invoices/#{invoice_id}/pay")).to have_been_made
     end
   end
+
+  context "when fetching a customer's upcoming invoice" do
+    let(:upcoming_arguments) { {customer: 'cus_1gTQyX0MXWWW5d'} }
+
+    before do
+      stub_get_with_auth('/invoices/upcoming')
+      Striped.invoice.upcoming(upcoming_arguments)
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(
+        a_get_with_auth('/invoices/upcoming').with(body: upcoming_arguments)
+      ).to have_been_made
+    end
+  end
 end
