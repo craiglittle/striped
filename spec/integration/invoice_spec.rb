@@ -63,4 +63,15 @@ describe Striped do
       end
     end
   end
+
+  context "when paying an invoice" do
+    before do
+      stub_post_with_auth("/invoices/#{invoice_id}/pay")
+      Striped.invoice(invoice_id).pay
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(a_post_with_auth("/invoices/#{invoice_id}/pay")).to have_been_made
+    end
+  end
 end
