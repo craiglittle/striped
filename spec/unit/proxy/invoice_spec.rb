@@ -32,4 +32,41 @@ describe Striped::Proxy::Invoice do
 
     it_returns_the_api_response
   end
+
+  describe "#upcoming" do
+    before { @response = proxy.upcoming(arguments) }
+
+    it "sends a request to pay an invoice" do
+      expect(client).to(
+        have_received(:get).with('/invoices/upcoming', body: arguments)
+      )
+    end
+
+    it_returns_the_api_response
+  end
+
+  describe "#lines" do
+    context "with the default arguments" do
+      before { @response = proxy.lines }
+
+      it "sends a request to fetch all instances of the resource" do
+        expect(client).to(
+          have_received(:get).with("/invoices/#{resource_id}/lines", body: nil)
+        )
+      end
+
+      it_returns_the_api_response
+    end
+
+    context "with additional arguments" do
+      before { @response = proxy.lines(arguments) }
+
+      it "sends a request to fetch specified instances of the resource" do
+        expect(client).to(
+          have_received(:get)
+            .with("/invoices/#{resource_id}/lines", body: arguments)
+        )
+      end
+    end
+  end
 end

@@ -89,4 +89,30 @@ describe Striped do
       ).to have_been_made
     end
   end
+
+  context "when fetching an invoice's line items" do
+    before { stub_get_with_auth("/invoices/#{invoice_id}/lines") }
+
+    context "with the default arguments" do
+      before { Striped.invoice(invoice_id).lines }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_get_with_auth("/invoices/#{invoice_id}/lines"))
+          .to have_been_made
+      end
+    end
+
+    context "with additional arguments" do
+      let(:lines_arguments) { {count: '20', offset: '40'} }
+
+      before { Striped.invoice(invoice_id).lines(lines_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(
+          a_get_with_auth("/invoices/#{invoice_id}/lines")
+            .with(body: lines_arguments)
+        ).to have_been_made
+      end
+    end
+  end
 end

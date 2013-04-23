@@ -14,6 +14,10 @@ module Striped
         client.get('/invoices/upcoming', body: arguments)
       end
 
+      def lines(arguments = nil)
+        client.get("/invoices/#{resource_id}/lines", body: arguments)
+      end
+
     end
   end
 end
