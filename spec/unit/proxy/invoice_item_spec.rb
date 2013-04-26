@@ -7,5 +7,5 @@ describe Striped::Proxy::InvoiceItem do
   let(:resource_id) { 'invoice_item_id' }
   subject(:proxy)   { Striped::Proxy::InvoiceItem.new(client, resource_id) }
 
-  it_executes_a_valid_operation :create, :fetch, :update, :delete
+  it_executes_a_valid_operation :create, :fetch, :update, :delete, :all
 end
