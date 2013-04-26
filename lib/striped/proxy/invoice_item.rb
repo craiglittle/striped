@@ -4,7 +4,7 @@ require 'striped/proxy/operations'
 module Striped
   module Proxy
     class InvoiceItem < Base
-      include Striped::Proxy::Operations :create, :fetch, :update
+      include Striped::Proxy::Operations :create, :fetch, :update, :delete
     end
   end
 end
