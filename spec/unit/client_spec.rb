@@ -72,6 +72,21 @@ describe Striped::Client do
     end
   end
 
+  describe "#invoice_item" do
+    before { Striped::Proxy::InvoiceItem.stub(:new).and_return(proxy) }
+
+    it "returns a invoice proxy" do
+      expect(client.invoice_item).to eq proxy
+    end
+
+    it "passes on an optional invoice ID" do
+      client.invoice_item('invoice_item_id')
+      expect(Striped::Proxy::InvoiceItem).to(
+        have_received(:new).with(client, 'invoice_item_id')
+      )
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }
