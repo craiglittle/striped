@@ -35,4 +35,25 @@ describe Striped do
         .to have_been_made
     end
   end
+
+  context "when updating an invoice item" do
+    let(:update_arguments) {
+      {
+        amount:      '1500',
+        description: 'Customer for test@example.com'
+      }
+    }
+
+    before do
+      stub_post_with_auth("/invoiceitems/#{invoice_item_id}")
+      Striped.invoice_item(invoice_item_id).update(update_arguments)
+    end
+
+    it "sends the proper request to the Stripe API" do
+      expect(
+        a_post_with_auth("/invoiceitems/#{invoice_item_id}")
+          .with(body: update_arguments)
+      ).to have_been_made
+    end
+  end
 end
