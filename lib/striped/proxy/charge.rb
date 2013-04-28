@@ -14,6 +14,10 @@ module Striped
         client.post("/#{resource}/#{resource_id}/capture", body: arguments)
       end
 
+      def dispute(arguments = nil)
+        client.post("/#{resource}/#{resource_id}/dispute", body: arguments)
+      end
+
     end
   end
 end

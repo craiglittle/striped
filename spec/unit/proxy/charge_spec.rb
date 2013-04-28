@@ -61,4 +61,30 @@ describe Striped::Proxy::Charge do
       end
     end
   end
+
+  describe "#dispute" do
+    context "with no arguments" do
+      before { @response = proxy.dispute }
+
+      it "sends a request to update the charge dispute" do
+        expect(client).to(
+          have_received(:post)
+            .with("/charges/#{resource_id}/dispute", body: nil)
+        )
+      end
+
+      it_returns_the_api_response
+    end
+
+    context "with arguments" do
+      before { @response = proxy.dispute(arguments) }
+
+      it "sends a request to capture the charge" do
+        expect(client).to(
+          have_received(:post)
+            .with("/charges/#{resource_id}/dispute", body: arguments)
+        )
+      end
+    end
+  end
 end

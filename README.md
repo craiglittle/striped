@@ -58,6 +58,11 @@ charge.refund
 # Capture a charge
 charge.capture
 
+# Update a charge dispute
+charge.dispute(
+  evidence: "Here's evidence showing this charge is legitimate."
+)
+
 # Fetch a collection of charges
 Striped.charge.all(count: 3)
 ```
@@ -215,15 +220,6 @@ invoice_item.delete
 
 # Fetch a list of invoice items
 Striped.invoice_item.all
-```
-
-### Disputes
-
-```ruby
-# Update a dispute
-Striped.dispute(charge: 'ch_1bJAHzdT333Rq1').update(
-  evidence: "Here's evidence showing this charge is legitimate."
-)
 ```
 
 ### Account

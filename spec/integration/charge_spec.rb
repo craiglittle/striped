@@ -99,4 +99,30 @@ describe Striped do
       end
     end
   end
+
+  context "when updating a charge dispute" do
+    before { stub_post_with_auth("/charges/#{charge_id}/dispute") }
+
+    context "with no arguments" do
+      before { Striped.charge(charge_id).dispute }
+
+      it "sends the proper request to the Stripe API" do
+        expect(a_post_with_auth("/charges/#{charge_id}/dispute")).to have_been_made
+      end
+    end
+
+    context "with arguments" do
+      let(:dispute_arguments) {
+        {evidence: "Here's evidence showing this charge is legitimate"}
+      }
+
+      before { Striped.charge(charge_id).dispute(dispute_arguments) }
+
+      it "sends the proper request to the Stripe API" do
+        expect(
+          a_post_with_auth("/charges/#{charge_id}/dispute").with(body: dispute_arguments)
+        ).to have_been_made
+      end
+    end
+  end
 end
