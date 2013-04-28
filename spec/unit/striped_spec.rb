@@ -13,7 +13,8 @@ describe Striped do
       :customer,
       :plan, :coupon,
       :invoice,
-      :invoice_item
+      :invoice_item,
+      :transfer
     ].each do |resource|
       describe "::#{resource}" do
         before do

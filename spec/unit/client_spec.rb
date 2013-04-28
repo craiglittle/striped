@@ -87,6 +87,21 @@ describe Striped::Client do
     end
   end
 
+  describe "#transfer" do
+    before { Striped::Proxy::Transfer.stub(:new).and_return(proxy) }
+
+    it "returns a transfer proxy" do
+      expect(client.transfer).to eq proxy
+    end
+
+    it "passes on an optional transfer ID" do
+      client.transfer('transfer_id')
+      expect(Striped::Proxy::Transfer).to(
+        have_received(:new).with(client, 'transfer_id')
+      )
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }
