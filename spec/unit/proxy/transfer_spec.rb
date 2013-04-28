@@ -7,5 +7,5 @@ describe Striped::Proxy::Transfer do
   let(:resource_id) { 'transfer_id' }
   subject(:proxy)   { Striped::Proxy::Transfer.new(client, resource_id) }
 
-  it_executes_a_valid_operation :fetch
+  it_executes_a_valid_operation :fetch, :all
 end
