@@ -3,7 +3,7 @@ module Striped
     class Base
       attr_reader :client, :resource, :resource_id
 
-      def initialize(client, resource_id)
+      def initialize(client, resource_id = nil)
         @client      = client
         @resource    = "#{self.class.to_s.split('::').last.downcase}s"
         @resource_id = resource_id

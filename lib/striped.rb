@@ -10,7 +10,8 @@ module Striped
     attr_accessor :api_key, :api_version
 
     delegate [
-      :charge, :customer, :plan, :coupon, :invoice, :invoice_item, :transfer
+      :charge, :customer, :plan, :coupon, :invoice, :invoice_item, :transfer,
+      :account
     ] => :client
   end
 

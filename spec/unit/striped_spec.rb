@@ -14,7 +14,8 @@ describe Striped do
       :plan, :coupon,
       :invoice,
       :invoice_item,
-      :transfer
+      :transfer,
+      :account
     ].each do |resource|
       describe "::#{resource}" do
         before do

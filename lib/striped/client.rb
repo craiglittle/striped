@@ -5,6 +5,7 @@ require 'striped/proxy/coupon'
 require 'striped/proxy/invoice'
 require 'striped/proxy/invoice_item'
 require 'striped/proxy/transfer'
+require 'striped/proxy/account'
 require 'striped/object'
 
 require 'faraday'
@@ -49,6 +50,10 @@ module Striped
 
     def transfer(transfer_id = nil)
       Striped::Proxy::Transfer.new(self, transfer_id)
+    end
+
+    def account
+      Striped::Proxy::Account.new(self)
     end
 
     def get(path, options = {})

@@ -102,6 +102,14 @@ describe Striped::Client do
     end
   end
 
+  describe "#account" do
+    before { Striped::Proxy::Account.stub(:new).and_return(proxy) }
+
+    it "returns a account proxy" do
+      expect(client.account).to eq proxy
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }
