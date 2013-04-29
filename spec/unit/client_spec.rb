@@ -125,6 +125,21 @@ describe Striped::Client do
     end
   end
 
+  describe "#token" do
+    before { Striped::Proxy::Token.stub(:new).and_return(proxy) }
+
+    it "returns a token proxy" do
+      expect(client.token).to eq proxy
+    end
+
+    it "passes on an optional token ID" do
+      client.token('token_id')
+      expect(Striped::Proxy::Token).to(
+        have_received(:new).with(client, 'token_id')
+      )
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }
