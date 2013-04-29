@@ -7,6 +7,6 @@ describe Striped::Proxy::Event do
   let(:resource_id) { 'event_id' }
   subject(:proxy)   { Striped::Proxy::Event.new(client, resource_id) }
 
-  it_executes_a_valid_operation :fetch
+  it_executes_a_valid_operation :fetch, :all
 end
 
