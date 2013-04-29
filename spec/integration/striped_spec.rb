@@ -27,7 +27,7 @@ describe Striped do
       expect(response_object.card.expiry).to eq '01/2015'
     end
 
-    describe "when an API version" do
+    context "and an API version" do
       let(:api_version) { '2013-02-13' }
 
       context "is specified" do
