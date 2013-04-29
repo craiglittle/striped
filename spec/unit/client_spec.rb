@@ -110,6 +110,21 @@ describe Striped::Client do
     end
   end
 
+  describe "#event" do
+    before { Striped::Proxy::Event.stub(:new).and_return(proxy) }
+
+    it "returns a event proxy" do
+      expect(client.event).to eq proxy
+    end
+
+    it "passes on an optional event ID" do
+      client.event('event_id')
+      expect(Striped::Proxy::Event).to(
+        have_received(:new).with(client, 'event_id')
+      )
+    end
+  end
+
   describe "request methods" do
     let(:path)     { 'path' }
     let(:options)  { mock('options') }

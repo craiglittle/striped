@@ -11,7 +11,7 @@ module Striped
 
     delegate [
       :charge, :customer, :plan, :coupon, :invoice, :invoice_item, :transfer,
-      :account
+      :account, :event
     ] => :client
   end
 
