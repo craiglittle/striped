@@ -82,7 +82,8 @@ module Striped
 
     def request(method, path, options)
       response = connection.send(method) do |request|
-        request.url  "#{API_NAMESPACE}#{path}", options[:params]
+        request.url "#{API_NAMESPACE}#{path}", options[:params]
+        request.headers[:stripe_version] = api_version if api_version_specified?
         request.body = options[:body]
       end.body
 
@@ -96,6 +97,10 @@ module Striped
         connection.response :multi_json, symbolize_keys: true
         connection.adapter  :net_http
       end
+    end
+
+    def api_version_specified?
+      !!api_version
     end
 
   end
