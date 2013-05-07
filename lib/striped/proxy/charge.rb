@@ -1,10 +1,10 @@
 require 'striped/proxy/base'
-require 'striped/proxy/operations'
+require 'striped/api/operations'
 
 module Striped
   module Proxy
     class Charge < Base
-      include Striped::Proxy::Operations :create, :fetch, :all
+      include Striped::API::Operations :create, :fetch, :all
 
       def refund(arguments = nil)
         client.post("/#{resource}/#{resource_id}/refund", body: arguments)

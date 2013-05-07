@@ -1,10 +1,10 @@
 require 'striped/proxy/base'
-require 'striped/proxy/operations'
+require 'striped/api/operations'
 
 module Striped
   module Proxy
     class Coupon < Base
-      include Striped::Proxy::Operations :create, :fetch, :delete, :all
+      include Striped::API::Operations :create, :fetch, :delete, :all
     end
   end
 end

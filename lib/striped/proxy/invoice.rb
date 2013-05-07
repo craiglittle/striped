@@ -1,10 +1,10 @@
 require 'striped/proxy/base'
-require 'striped/proxy/operations'
+require 'striped/api/operations'
 
 module Striped
   module Proxy
     class Invoice < Base
-      include Striped::Proxy::Operations :create, :fetch, :update, :all
+      include Striped::API::Operations :create, :fetch, :update, :all
 
       def pay
         client.post("/invoices/#{resource_id}/pay")

@@ -1,12 +1,12 @@
 require 'striped/proxy/base'
-require 'striped/proxy/operations'
+require 'striped/api/operations'
 require 'striped/proxy/subscription'
 require 'striped/proxy/discount'
 
 module Striped
   module Proxy
     class Customer < Base
-      include Striped::Proxy::Operations :create, :fetch, :update, :delete, :all
+      include Striped::API::Operations :create, :fetch, :update, :delete, :all
 
       def subscription
         Striped::Proxy::Subscription.new(client, resource_id)

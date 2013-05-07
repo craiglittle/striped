@@ -1,10 +1,10 @@
 require 'striped/proxy/base'
-require 'striped/proxy/operations'
+require 'striped/api/operations'
 
 module Striped
   module Proxy
     class Token < Base
-      include Striped::Proxy::Operations :create, :fetch
+      include Striped::API::Operations :create, :fetch
     end
   end
 end
