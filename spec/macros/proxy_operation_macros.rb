@@ -5,7 +5,7 @@ module ProxyOperationMacros
   end
 
   module Macros
-    SUPPORTED_OPERATIONS   = [:create, :fetch, :update, :delete, :all]
+    SUPPORTED_OPERATIONS = [:create, :fetch, :update, :delete, :all]
 
     def it_executes_a_valid_operation(*operations)
       let(:arguments)    { double('arguments') }
